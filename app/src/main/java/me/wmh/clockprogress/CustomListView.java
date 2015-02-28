@@ -177,7 +177,7 @@ public class CustomListView extends ListView implements OnScrollListener {
      * 添加下拉刷新的HeadView
      */
     private void addHeadView() {
-        mHeaderView = (LinearLayout) mInflater.inflate(R.layout.llist_header_view,null);
+        mHeaderView = (LinearLayout) mInflater.inflate(R.layout.list_header_view,null);
 
         cProgress = (ClockProgress) mHeaderView.findViewById(R.id.clock_progress);
         mTipsTextView = (TextView) mHeaderView.findViewById(R.id.head_tipsTextView);
