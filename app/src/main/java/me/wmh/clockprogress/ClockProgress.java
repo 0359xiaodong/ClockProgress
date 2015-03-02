@@ -11,6 +11,8 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Jeremy on 2015/2/4.
  */
@@ -90,6 +92,11 @@ public class ClockProgress extends View {
      * 默认高度
      */
     private int DEFAULT_VIEW_HEIGHT = 100;
+
+    /**
+     * 下拉距离与旋转角度的比率
+     */
+    private double ratio = 0.00;
 
     public ClockProgress(Context context) {
         super(context);
@@ -182,11 +189,12 @@ public class ClockProgress extends View {
      * @param currentPadding 实际距离
      */
     public void setClockByPaddingTop(int defaultPadding,int currentPadding){
+        ratio = -360.0/defaultPadding;
         if(currentPadding == defaultPadding){
             setClockToZero();
         }else if(currentPadding < 0 && currentPadding > defaultPadding){
             //根据高度换算出秒针旋转的角度，旋转到当前的角度正好等于默认的高度时表针正好旋转一周，之后不再旋转
-            secondDegree = -3*(defaultPadding-currentPadding);
+            secondDegree = (float)(-ratio*(defaultPadding-currentPadding));
             matrixSecondManual.setRotate(secondDegree, rotateSecondX, rotateSecondY);
             invalidate();
         }
